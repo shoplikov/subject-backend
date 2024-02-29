@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .similar-article-item {
+            margin-bottom: 10px;
+        }
+        .article-image {
+            max-height: 200px;
+            width: auto; 
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/header') %>
+
+    <div class="container mt-5">
+        <h1><%= article.title %></h1>
+        <p><%= article.content %></p>
+        <p class="card-text text-end"><small class="text-muted">Author: <%= article.author.username %></small></p>
+        <% if (article.imageUrl) { %>
+            <img src="<%= article.imageUrl %>" alt="Image Preview" class="article-image"> 
+        <% } %>
+    
+        <h2>Articles that you can like</h2>
+        <ul class="list-group">
+            <% similarArticles.forEach(similarArticle => { %>
+                <li class="list-group-item similar-article-item">
+                    <a href="<%= similarArticle.url %>"><%= similarArticle.title %></a> (Source: <%= similarArticle.source %>)
+                </li>
+            <% }); %>
+        </ul>
+    </div>
+
+    
+    <%- include('./partials/footer') %>
+</body>
+</html>
